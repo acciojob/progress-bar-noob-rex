@@ -1,5 +1,5 @@
-//your JS code here. If required.
 const circles = document.querySelectorAll('.circle');
+const lines = document.querySelectorAll('.line');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 let currentActive = 1;
@@ -25,6 +25,7 @@ prevButton.addEventListener('click', () => {
 });
 
 function update() {
+  // Update circles
   circles.forEach((circle, index) => {
     if (index < currentActive) {
       circle.classList.add('active');
@@ -33,12 +34,16 @@ function update() {
     }
   });
 
-  if (currentActive === 1) {
-    prevButton.disabled = true;
-  } else if (currentActive === circles.length) {
-    nextButton.disabled = true;
-  } else {
-    prevButton.disabled = false;
-    nextButton.disabled = false;
-  }
+  // Update lines
+  lines.forEach((line, index) => {
+    if (index < currentActive - 1) {
+      line.classList.add('active');
+    } else {
+      line.classList.remove('active');
+    }
+  });
+
+  // Enable/disable buttons
+  prevButton.disabled = currentActive === 1;
+  nextButton.disabled = currentActive === circles.length;
 }
