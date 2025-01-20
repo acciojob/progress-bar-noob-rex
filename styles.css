@@ -1,53 +1,74 @@
-/*  your css code here. If applicable */
-.sec {
-	background-color: #F6F7FB;
-	width: 800px;
-	height: 300px;
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
-.top {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 30px;
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 60%;
+    margin-bottom: 20px;
 }
+
 .circle {
-	background-color: white;
-	width: 35px;
-	height: 35px;
-	border: 3px solid #E0E0E0;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    border: 3px solid lightgrey;
+    color: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    z-index: 1;
 }
-.line {
-	width: 50px;
-	border: 3px solid #E0E0E0;
+
+.circle.active {
+    border-color: rgb(52,152,219);
+    color: rgb(52,152,219);
 }
-.active {
-	border: 3px solid #3498DB;
+
+.progress {
+    position: absolute;
+    top: calc(50% - 2px); /* Adjusted top position */
+    left: 0;
+    height: 4px;
+    background-color: lightgray;
+    width: 100%;
+    z-index: 0;
+    transform: translateY(-50%);
 }
-#prev {
-	background-color: #3498DB;
-	color: white;
-	width: 100px;
-	padding: 13px;
-	margin: 8px;
-	border: none;
-	border-radius: 7px;
-	font-size : 16px;
+
+.progress-active {
+    background-color: rgb(52,152,219);
+    width: 0;
+    height: 100%; /* Ensure the height is 100% of the progress element */
+    transition: width 0.3s;
 }
-#next {
-	background-color: #3498DB;
-	color: white;
-	width: 100px;
-	padding: 13px;
-	margin: 8px;
-	border: none;
-	border-radius: 7px;
-	font-size : 16px;
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: rgb(52,152,219);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:disabled {
+    background-color: white;
+    cursor: not-allowed;
 }

@@ -1,89 +1,55 @@
-//your JS code here. If required.
 const circles = document.querySelectorAll('.circle');
+const progress = document.getElementById('progress');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 let currentActive = 1;
 
 nextButton.addEventListener('click', () => {
-  currentActive++;
+    currentActive++;
 
-  if (currentActive > circles.length) {
-    currentActive = circles.length;
-  }
+    if (currentActive > circles.length) {
+        currentActive = circles.length;
+    }
 
-  update();
+    update();
 });
 
 prevButton.addEventListener('click', () => {
-  currentActive--;
+    currentActive--;
 
-  if (currentActive < 1) {
-    currentActive = 1;
-  }
+    if (currentActive < 1) {
+        currentActive = 1;
+    }
 
-  update();
+    update();
 });
 
 function update() {
-  circles.forEach((circle, index) => {
-    if (index < currentActive) {
-      circle.classList.add('active');
-    } else {
-      circle.classList.remove('active');
-    }
-  });
+    circles.forEach((circle, idx) => {
+        if (idx < currentActive) {
+            circle.classList.add('active');
+        } else {
+            circle.classList.remove('active');
+        }
+    });
 
-  if (currentActive === 1) {
-    prevButton.disabled = true;
-  } else if (currentActive === circles.length) {
-    nextButton.disabled = true;
-  } else {
-    prevButton.disabled = false;
-    nextButton.disabled = false;
-  }
+    const actives = document.querySelectorAll('.circle.active');
+    const progressWidth = ((actives.length - 1) / (circles.length - 1)) * 100;
+    progress.style.width = `${progressWidth}%`;
+    progress.style.backgroundColor = "rgb(52,152,219)";
+
+    if (currentActive === 1) {
+        prevButton.disabled = true;
+    } else {
+        prevButton.disabled = false;
+    }
+
+    if (currentActive === circles.length) {
+        nextButton.disabled = true;
+    } else {
+        nextButton.disabled = false;
+    }
 }
 
-
-// const lines = document.querySelectorAll('.line');
-// const prevBtn = document.getElementById('prev');
-// const nextBtn = document.getElementById('next');
-// let currActive = 1;
-
-// nextBtn.addEventListener('click', () => {
-//   currActive++;
-
-//   if (currActive > lines.length) {
-//     currActive = lines.length;
-//   }
-
-//   updateline();
-// });
-
-// prevButton.addEventListener('click', () => {
-//   currActive--;
-
-//   if (currActive < 1) {
-//     currActive = 1;
-//   }
-
-//   updateline();
-// });
-
-// function updateline() {
-//   lines.forEach((line, index) => {
-//     if (index < currActive) {
-//       line.classList.add('active');
-//     } else {
-//       line.classList.remove('active');
-//     }
-//   });
-
-//   if (currActive === 1) {
-//     prevBtn.disabled = true;
-//   } else if (currActive === lines.length) {
-//     nextBtn.disabled = true;
-//   } else {
-//     prevBtn.disabled = false;
-//     nextBtn.disabled = false;
-//   }
-// }
+// Initial call to set the correct state on page load
+update();
